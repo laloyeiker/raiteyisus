@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raite Yisus - Transporte Seguro entre Estados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            color: white;
+            padding: 20px;
+        }
+
+        .info-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .quote-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            transform: translateY(-20px);
+        }
+
+        .quote-container h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .quote-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .quote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .quote-btn:active {
+            transform: translateY(0);
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            text-align: center;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .trust-item .number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .trust-item .label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* Pestaña popup de testimonios */
+        .testimonials-tab {
+            position: fixed;
+            left: -300px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 350px;
+            background: white;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .testimonials-tab.active {
+            left: 0;
+        }
+
+        .tab-trigger {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            background: #667eea;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: background 0.3s ease;
+        }
+
+        .tab-trigger:hover {
+            background: #5a6fd8;
+        }
+
+        .testimonials-content {
+            padding: 25px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-header h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .testimonials-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel-videos {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .video-slide {
+            min-width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .video-placeholder::before {
+            content: "▶";
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .video-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .video-info h4 {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #667eea;
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #667eea;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-arrows:hover {
+            background: white;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .close-tab {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-tab:hover {
+            color: #666;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .main-content {
+                gap: 30px;
+            }
+
+            .quote-container {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .info-section {
+                text-align: center;
+                order: 2;
+                padding: 10px;
+            }
+
+            .info-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .quote-container {
+                order: 1;
+                margin-bottom: 20px;
+                padding: 30px 20px;
+                max-width: 100%;
+                transform: translateY(0);
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .trust-indicators {
+                gap: 20px;
+                margin-top: 40px;
+            }
+
+            .trust-item .number {
+                font-size: 1.5rem;
+            }
+
+            .testimonials-tab {
+                width: 90vw;
+                left: -90vw;
+            }
+
+            .testimonials-tab.active {
+                left: 0;
+            }
+
+            .tab-trigger {
+                right: -45px;
+                padding: 12px 15px;
+                font-size: 0.8rem;
+            }
+
+            .testimonials-content {
+                padding: 20px;
+            }
+
+            .video-placeholder {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 40px 0 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .quote-container {
+                padding: 20px 15px;
+            }
+
+            .quote-container h3 {
+                font-size: 1.2rem;
+            }
+
+            input, select {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .quote-btn {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            .features li {
+                font-size: 1rem;
+            }
+
+            .trust-indicators {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .trust-item {
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .quote-container {
+                padding: 15px 10px;
+            }
+
+            .testimonials-tab {
+                width: 95vw;
+                left: -95vw;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-elements::before {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .autocomplete-container {
+            position: relative;
+        }
+
+        .autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .autocomplete-suggestions.show {
+            display: block;
+        }
+
+        .suggestion-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s ease;
+        }
+
+        .suggestion-item:hover {
+            background: #f8f9ff;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-city {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .suggestion-state {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .input-valid {
+            border-color: #4CAF50 !important;
+            background: #f8fff8 !important;
+        }
+
+        .input-invalid {
+            border-color: #f44336 !important;
+            background: #fff8f8 !important;
+        }
+
+        .validation-message {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            padding: 0 5px;
+        }
+
+        .validation-success {
+            color: #4CAF50;
+        }
+
+        .validation-error {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements"></div>
+    
+    <!-- Pestaña de testimonios -->
+    <div class="testimonials-tab" id="testimonialsTab">
+        <button class="tab-trigger" onclick="toggleTestimonials()">
+            ⭐ Clientes Satisfechos
+        </button>
+        <button class="close-tab" onclick="closeTestimonials()">×</button>
+        
+        <div class="testimonials-content">
+            <div class="testimonials-header">
+                <h3>🎥 Testimonios Reales</h3>
+                <p>Escucha lo que dicen nuestros clientes</p>
+            </div>
+            
+            <div class="carousel-container">
+                <div class="carousel-videos" id="carouselVideos">
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(1)">
+                            <div class="video-info">
+                                <h4>María González</h4>
+                                <p>"Excelente servicio de LA a Phoenix"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(2)">
+                            <div class="video-info">
+                                <h4>Carlos Martínez</h4>
+                                <p>"Muy puntual y cómodo viaje"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(3)">
+                            <div class="video-info">
+                                <h4>Ana Rodríguez</h4>
+                                <p>"Conductores muy profesionales"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(4)">
+                            <div class="video-info">
+                                <h4>José López</h4>
+                                <p>"Precio justo y buen trato"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(5)">
+                            <div class="video-info">
+                                <h4>Carmen Flores</h4>
+                                <p>"Los recomiendo 100%"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-arrows carousel-prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-arrows carousel-next" onclick="nextSlide()">❯</button>
+            </div>
+            
+            <div class="carousel-nav" id="carouselNav">
+                <div class="nav-dot active" onclick="goToSlide(0)"></div>
+                <div class="nav-dot" onclick="goToSlide(1)"></div>
+                <div class="nav-dot" onclick="goToSlide(2)"></div>
+                <div class="nav-dot" onclick="goToSlide(3)"></div>
+                <div class="nav-dot" onclick="goToSlide(4)"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">🚐 Raite Yisus</h1>
+            <p class="tagline">Transporte Seguro y Confiable</p>
+            <p class="subtitle">Te llevamos de estado a estado por todo Estados Unidos con la mejor experiencia de viaje</p>
+        </header>
+
+        <div class="main-content">
+            <div class="info-section">
+                <h2>¿Por qué elegir Raite Yisus?</h2>
+                <ul class="features">
+                    <li>Conductores experimentados y certificados</li>
+                    <li>Vehículos cómodos y en excelente estado</li>
+                    <li>Precios competitivos y transparentes</li>
+                    <li>Servicio puerta a puerta</li>
+                    <li>Disponible 24/7</li>
+                    <li>Seguro de viaje incluido</li>
+                </ul>
+            </div>
+
+            <div class="quote-container">
+                <h3>💰 Cotiza tu viaje ahora</h3>
+                <form id="quoteForm">
+                    <div class="form-group">
+                        <label for="origen">Ciudad de Origen</label>
+                        <div class="autocomplete-container">
+                            <input type="text" id="origen" name="origen" placeholder="Escribe tu ciudad (ej: Richmond)" autocomplete="off" required>
+                            <div class="autocomplete-suggestions" id="origenSuggestions"></div>
+                            <div class="validation-message" id="origenValidation"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destino">Ciudad de Destino</label>
+                        <div class="autocomplete-container">
+                            <input type="text" id="destino" name="destino" placeholder="Escribe tu destino (ej: Miami)" autocomplete="off" required>
+                            <div class="autocomplete-suggestions" id="destinoSuggestions"></div>
+                            <div class="validation-message" id="destinoValidation"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha del Viaje</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personas">Personas</label>
+                            <select id="personas" name="personas" required>
+                                <option value="">Seleccionar</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6+">6+ personas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maletas">Maletas</label>
+                            <select id="maletas" name="maletas" required>
+                                <option value="">Seleccionar</option>
+                                <option value="0">Sin maletas</option>
+                                <option value="1">1 maleta</option>
+                                <option value="2">2 maletas</option>
+                                <option value="3">3 maletas</option>
+                                <option value="4">4 maletas</option>
+                                <option value="5+">5+ maletas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="quote-btn">
+                        📱 ¡Cotizar Ahora en WhatsApp!
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="trust-indicators">
+            <div class="trust-item">
+                <span class="number">500+</span>
+                <span class="label">Viajes Completados</span>
+            </div>
+            <div class="trust-item">
+                <span class="number">98%</span>
+                <span class="label">Satisfacción del Cliente</span>
+            </div>
+            <div class="trust-item">
+                <span class="number">15</span>
+                <span class="label">Estados Cubiertos</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Raite Yisus. Conectando destinos, creando experiencias.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variables del carrusel
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        // Base de datos de ciudades estadounidenses
+        const ciudadesEstadounidenses = [
+            { ciudad: "New York City", estado: "New York" },
+            { ciudad: "Los Angeles", estado: "California" },
+            { ciudad: "Chicago", estado: "Illinois" },
+            { ciudad: "Houston", estado: "Texas" },
+            { ciudad: "Phoenix", estado: "Arizona" },
+            { ciudad: "Philadelphia", estado: "Pennsylvania" },
+            { ciudad: "San Antonio", estado: "Texas" },
+            { ciudad: "San Diego", estado: "California" },
+            { ciudad: "Dallas", estado: "Texas" },
+            { ciudad: "San Jose", estado: "California" },
+            { ciudad: "Austin", estado: "Texas" },
+            { ciudad: "Jacksonville", estado: "Florida" },
+            { ciudad: "Fort Worth", estado: "Texas" },
+            { ciudad: "Columbus", estado: "Ohio" },
+            { ciudad: "Charlotte", estado: "North Carolina" },
+            { ciudad: "San Francisco", estado: "California" },
+            { ciudad: "Indianapolis", estado: "Indiana" },
+            { ciudad: "Seattle", estado: "Washington" },
+            { ciudad: "Denver", estado: "Colorado" },
+            { ciudad: "Washington", estado: "District of Columbia" },
+            { ciudad: "Boston", estado: "Massachusetts" },
+            { ciudad: "El Paso", estado: "Texas" },
+            { ciudad: "Nashville", estado: "Tennessee" },
+            { ciudad: "Detroit", estado: "Michigan" },
+            { ciudad: "Oklahoma City", estado: "Oklahoma" },
+            { ciudad: "Portland", estado: "Oregon" },
+            { ciudad: "Las Vegas", estado: "Nevada" },
+            { ciudad: "Memphis", estado: "Tennessee" },
+            { ciudad: "Louisville", estado: "Kentucky" },
+            { ciudad: "Baltimore", estado: "Maryland" },
+            { ciudad: "Milwaukee", estado: "Wisconsin" },
+            { ciudad: "Albuquerque", estado: "New Mexico" },
+            { ciudad: "Tucson", estado: "Arizona" },
+            { ciudad: "Fresno", estado: "California" },
+            { ciudad: "Sacramento", estado: "California" },
+            { ciudad: "Kansas City", estado: "Missouri" },
+            { ciudad: "Long Beach", estado: "California" },
+            { ciudad: "Mesa", estado: "Arizona" },
+            { ciudad: "Atlanta", estado: "Georgia" },
+            { ciudad: "Colorado Springs", estado: "Colorado" },
+            { ciudad: "Virginia Beach", estado: "Virginia" },
+            { ciudad: "Raleigh", estado: "North Carolina" },
+            { ciudad: "Omaha", estado: "Nebraska" },
+            { ciudad: "Miami", estado: "Florida" },
+            { ciudad: "Oakland", estado: "California" },
+            { ciudad: "Minneapolis", estado: "Minnesota" },
+            { ciudad: "Tulsa", estado: "Oklahoma" },
+            { ciudad: "Wichita", estado: "Kansas" },
+            { ciudad: "New Orleans", estado: "Louisiana" },
+            { ciudad: "Arlington", estado: "Texas" },
+            { ciudad: "Cleveland", estado: "Ohio" },
+            { ciudad: "Bakersfield", estado: "California" },
+            { ciudad: "Tampa", estado: "Florida" },
+            { ciudad: "Aurora", estado: "Colorado" },
+            { ciudad: "Honolulu", estado: "Hawaii" },
+            { ciudad: "Anaheim", estado: "California" },
+            { ciudad: "Santa Ana", estado: "California" },
+            { ciudad: "Corpus Christi", estado: "Texas" },
+            { ciudad: "Riverside", estado: "California" },
+            { ciudad: "Lexington", estado: "Kentucky" },
+            { ciudad: "Stockton", estado: "California" },
+            { ciudad: "Henderson", estado: "Nevada" },
+            { ciudad: "Saint Paul", estado: "Minnesota" },
+            { ciudad: "St. Louis", estado: "Missouri" },
+            { ciudad: "Cincinnati", estado: "Ohio" },
+            { ciudad: "Pittsburgh", estado: "Pennsylvania" },
+            { ciudad: "Greensboro", estado: "North Carolina" },
+            { ciudad: "Anchorage", estado: "Alaska" },
+            { ciudad: "Plano", estado: "Texas" },
+            { ciudad: "Lincoln", estado: "Nebraska" },
+            { ciudad: "Orlando", estado: "Florida" },
+            { ciudad: "Irvine", estado: "California" },
+            { ciudad: "Newark", estado: "New Jersey" },
+            { ciudad: "Durham", estado: "North Carolina" },
+            { ciudad: "Chula Vista", estado: "California" },
+            { ciudad: "Toledo", estado: "Ohio" },
+            { ciudad: "Fort Wayne", estado: "Indiana" },
+            { ciudad: "St. Petersburg", estado: "Florida" },
+            { ciudad: "Laredo", estado: "Texas" },
+            { ciudad: "Jersey City", estado: "New Jersey" },
+            { ciudad: "Chandler", estado: "Arizona" },
+            { ciudad: "Madison", estado: "Wisconsin" },
+            { ciudad: "Lubbock", estado: "Texas" },
+            { ciudad: "Scottsdale", estado: "Arizona" },
+            { ciudad: "Reno", estado: "Nevada" },
+            { ciudad: "Buffalo", estado: "New York" },
+            { ciudad: "Gilbert", estado: "Arizona" },
+            { ciudad: "Glendale", estado: "Arizona" },
+            { ciudad: "North Las Vegas", estado: "Nevada" },
+            { ciudad: "Winston-Salem", estado: "North Carolina" },
+            { ciudad: "Chesapeake", estado: "Virginia" },
+            { ciudad: "Norfolk", estado: "Virginia" },
+            { ciudad: "Fremont", estado: "California" },
+            { ciudad: "Garland", estado: "Texas" },
+            { ciudad: "Irving", estado: "Texas" },
+            { ciudad: "Hialeah", estado: "Florida" },
+            { ciudad: "Richmond", estado: "Virginia" },
+            { ciudad: "Boise", estado: "Idaho" },
+            { ciudad: "Spokane", estado: "Washington" },
+            { ciudad: "Baton Rouge", estado: "Louisiana" },
+            { ciudad: "Tacoma", estado: "Washington" },
+            { ciudad: "San Bernardino", estado: "California" },
+            { ciudad: "Modesto", estado: "California" },
+            { ciudad: "Fontana", estado: "California" },
+            { ciudad: "Des Moines", estado: "Iowa" },
+            { ciudad: "Moreno Valley", estado: "California" },
+            { ciudad: "Santa Clarita", estado: "California" },
+            { ciudad: "Fayetteville", estado: "North Carolina" },
+            { ciudad: "Birmingham", estado: "Alabama" },
+            { ciudad: "Oxnard", estado: "California" },
+            { ciudad: "Rochester", estado: "New York" },
+            { ciudad: "Port St. Lucie", estado: "Florida" },
+            { ciudad: "Grand Rapids", estado: "Michigan" },
+            { ciudad: "Huntsville", estado: "Alabama" },
+            { ciudad: "Salt Lake City", estado: "Utah" },
+            { ciudad: "Frisco", estado: "Texas" },
+            { ciudad: "Yonkers", estado: "New York" },
+            { ciudad: "Amarillo", estado: "Texas" },
+            { ciudad: "Glendale", estado: "California" },
+            { ciudad: "Huntington Beach", estado: "California" },
+            { ciudad: "McKinney", estado: "Texas" },
+            { ciudad: "Montgomery", estado: "Alabama" },
+            { ciudad: "Akron", estado: "Ohio" },
+            { ciudad: "Little Rock", estado: "Arkansas" },
+            { ciudad: "Augusta", estado: "Georgia" },
+            { ciudad: "Columbus", estado: "Georgia" },
+            { ciudad: "Grand Prairie", estado: "Texas" },
+            { ciudad: "Overland Park", estado: "Kansas" },
+            { ciudad: "Tallahassee", estado: "Florida" },
+            { ciudad: "Tempe", estado: "Arizona" },
+            { ciudad: "Cape Coral", estado: "Florida" },
+            { ciudad: "Mobile", estado: "Alabama" },
+            { ciudad: "Warren", estado: "Michigan" },
+            { ciudad: "Brownsville", estado: "Texas" },
+            { ciudad: "Fort Lauderdale", estado: "Florida" },
+            { ciudad: "Richmond", estado: "California" },
+            { ciudad: "Shreveport", estado: "Louisiana" },
+            { ciudad: "Knoxville", estado: "Tennessee" },
+            { ciudad: "Worcester", estado: "Massachusetts" },
+            { ciudad: "Vancouver", estado: "Washington" },
+            { ciudad: "Providence", estado: "Rhode Island" },
+            { ciudad: "Newport News", estado: "Virginia" },
+            { ciudad: "Santa Rosa", estado: "California" },
+            { ciudad: "Peoria", estado: "Arizona" },
+            { ciudad: "Eugene", estado: "Oregon" },
+            { ciudad: "Pembroke Pines", estado: "Florida" },
+            { ciudad: "Salem", estado: "Oregon" },
+            { ciudad: "Oceanside", estado: "California" },
+            { ciudad: "Sioux Falls", estado: "South Dakota" },
+            { ciudad: "Springfield", estado: "Missouri" },
+            { ciudad: "Rancho Cucamonga", estado: "California" },
+            { ciudad: "Elk Grove", estado: "California" },
+            { ciudad: "Corona", estado: "California" },
+            { ciudad: "Paterson", estado: "New Jersey" },
+            { ciudad: "Lancaster", estado: "California" },
+            { ciudad: "Salinas", estado: "California" },
+            { ciudad: "Palmdale", estado: "California" },
+            { ciudad: "Hollywood", estado: "Florida" },
+            { ciudad: "Hayward", estado: "California" },
+            { ciudad: "Alexandria", estado: "Virginia" },
+            { ciudad: "Lakewood", estado: "Colorado" },
+            { ciudad: "Torrance", estado: "California" },
+            { ciudad: "Escondido", estado: "California" },
+            { ciudad: "Fort Collins", estado: "Colorado" },
+            { ciudad: "Sunnyvale", estado: "California" },
+            { ciudad: "Killeen", estado: "Texas" },
+            { ciudad: "Mesquite", estado: "Texas" },
+            { ciudad: "Orange", estado: "California" },
+            { ciudad: "Pasadena", estado: "California" },
+            { ciudad: "Fullerton", estado: "California" },
+            { ciudad: "McAllen", estado: "Texas" },
+            { ciudad: "Kansas City", estado: "Kansas" },
+            { ciudad: "Hampton", estado: "Virginia" },
+            { ciudad: "Thornton", estado: "Colorado" },
+            { ciudad: "Pasadena", estado: "Texas" },
+            { ciudad: "Roseville", estado: "California" },
+            { ciudad: "Chattanooga", estado: "Tennessee" },
+            { ciudad: "Surprise", estado: "Arizona" },
+            { ciudad: "Denton", estado: "Texas" },
+            { ciudad: "Miramar", estado: "Florida" },
+            { ciudad: "Waco", estado: "Texas" },
+            { ciudad: "Thousand Oaks", estado: "California" },
+            { ciudad: "Cedar Rapids", estado: "Iowa" },
+            { ciudad: "Charleston", estado: "South Carolina" },
+            { ciudad: "Visalia", estado: "California" },
+            { ciudad: "Topeka", estado: "Kansas" },
+            { ciudad: "Elizabeth", estado: "New Jersey" },
+            { ciudad: "Gainesville", estado: "Florida" },
+            { ciudad: "Coral Springs", estado: "Florida" },
+            { ciudad: "Sterling Heights", estado: "Michigan" },
+            { ciudad: "New Haven", estado: "Connecticut" },
+            { ciudad: "Carrollton", estado: "Texas" },
+            { ciudad: "West Valley City", estado: "Utah" },
+            { ciudad: "Concord", estado: "California" },
+            { ciudad: "Charleston", estado: "West Virginia" },
+            { ciudad: "Inglewood", estado: "California" },
+            { ciudad: "Waterbury", estado: "Connecticut" },
+            { ciudad: "Beaumont", estado: "Texas" },
+            { ciudad: "Evansville", estado: "Indiana" },
+            { ciudad: "Hartford", estado: "Connecticut" },
+            { ciudad: "West Jordan", estado: "Utah" },
+            { ciudad: "Stamford", estado: "Connecticut" },
+            { ciudad: "Olathe", estado: "Kansas" },
+            { ciudad: "Jersey City", estado: "New Jersey" },
+            { ciudad: "Simi Valley", estado: "California" },
+            { ciudad: "Naperville", estado: "Illinois" },
+            { ciudad: "Bellevue", estado: "Washington" },
+            { ciudad: "Clarksville", estado: "Tennessee" },
+            { ciudad: "Murfreesboro", estado: "Tennessee" },
+            { ciudad: "Pearland", estado: "Texas" },
+            { ciudad: "Ann Arbor", estado: "Michigan" },
+            { ciudad: "Columbia", estado: "South Carolina" },
+            { ciudad: "Abilene", estado: "Texas" },
+            { ciudad: "Arvada", estado: "Colorado" },
+            { ciudad: "Berkeley", estado: "California" },
+            { ciudad: "Round Rock", estado: "Texas" },
+            { ciudad: "Cambridge", estado: "Massachusetts" },
+            { ciudad: "Westminster", estado: "Colorado" },
+            { ciudad: "Allentown", estado: "Pennsylvania" },
+            { ciudad: "Rochester", estado: "Minnesota" },
+            { ciudad: "Provo", estado: "Utah" },
+            { ciudad: "El Monte", estado: "California" },
+            { ciudad: "Lansing", estado: "Michigan" },
+            { ciudad: "Evanston", estado: "Illinois" },
+            { ciudad: "Columbia", estado: "Missouri" },
+            { ciudad: "Norman", estado: "Oklahoma" },
+            { ciudad: "Fargo", estado: "North Dakota" },
+            { ciudad: "Wilmington", estado: "North Carolina" },
+            { ciudad: "Gresham", estado: "Oregon" }
+        ];
+
+        // Variables para validación
+        let origenValido = false;
+        let destinoValido = false;
+
+        // Función de búsqueda y autocompletado
+        function setupAutocomplete(inputId, suggestionsId, validationId) {
+            const input = document.getElementById(inputId);
+            const suggestions = document.getElementById(suggestionsId);
+            const validation = document.getElementById(validationId);
+            
+            input.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                
+                if (query.length < 2) {
+                    suggestions.classList.remove('show');
+                    updateValidation(inputId, false, '');
+                    return;
+                }
+                
+                // Buscar coincidencias
+                const matches = ciudadesEstadounidenses.filter(item => 
+                    item.ciudad.toLowerCase().includes(query) ||
+                    item.estado.toLowerCase().includes(query)
+                ).slice(0, 8); // Máximo 8 sugerencias
+                
+                if (matches.length > 0) {
+                    displaySuggestions(matches, suggestions, input, inputId);
+                } else {
+                    suggestions.classList.remove('show');
+                    updateValidation(inputId, false, 'No se encontraron ciudades');
+                }
+            });
+            
+            // Cerrar sugerencias al hacer click fuera
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !suggestions.contains(e.target)) {
+                    suggestions.classList.remove('show');
+                }
+            });
+        }
+
+        function displaySuggestions(matches, suggestionsContainer, input, inputId) {
+            suggestionsContainer.innerHTML = '';
+            
+            matches.forEach(match => {
+                const div = document.createElement('div');
+                div.className = 'suggestion-item';
+                div.innerHTML = `
+                    <div class="suggestion-city">${match.ciudad}</div>
+                    <div class="suggestion-state">${match.estado}</div>
+                `;
+                
+                div.addEventListener('click', function() {
+                    input.value = `${match.ciudad}, ${match.estado}`;
+                    suggestionsContainer.classList.remove('show');
+                    updateValidation(inputId, true, `✓ ${match.ciudad}, ${match.estado}`);
+                });
+                
+                suggestionsContainer.appendChild(div);
+            });
+            
+            suggestionsContainer.classList.add('show');
+        }
+
+        function updateValidation(inputId, isValid, message) {
+            const input = document.getElementById(inputId);
+            const validation = document.getElementById(inputId + 'Validation');
+            
+            // Actualizar estado de validación
+            if (inputId === 'origen') origenValido = isValid;
+            if (inputId === 'destino') destinoValido = isValid;
+            
+            // Actualizar estilos
+            input.classList.remove('input-valid', 'input-invalid');
+            validation.classList.remove('validation-success', 'validation-error');
+            
+            if (message) {
+                if (isValid) {
+                    input.classList.add('input-valid');
+                    validation.classList.add('validation-success');
+                } else {
+                    input.classList.add('input-invalid');
+                    validation.classList.add('validation-error');
+                }
+                validation.textContent = message;
+            } else {
+                validation.textContent = '';
+            }
+        }
+
+        // Validar si el texto ingresado corresponde a una ciudad válida
+        function validateCityInput(inputId) {
+            const input = document.getElementById(inputId);
+            const value = input.value.trim();
+            
+            if (!value) {
+                updateValidation(inputId, false, '');
+                return false;
+            }
+            
+            // Buscar coincidencia exacta
+            const exactMatch = ciudadesEstadounidenses.find(item => 
+                `${item.ciudad}, ${item.estado}`.toLowerCase() === value.toLowerCase() ||
+                item.ciudad.toLowerCase() === value.toLowerCase()
+            );
+            
+            if (exactMatch) {
+                if (!value.includes(',')) {
+                    input.value = `${exactMatch.ciudad}, ${exactMatch.estado}`;
+                }
+                updateValidation(inputId, true, `✓ ${exactMatch.ciudad}, ${exactMatch.estado}`);
+                return true;
+            } else {
+                updateValidation(inputId, false, 'Por favor selecciona una ciudad válida de la lista');
+                return false;
+            }
+        }
+
+        // Inicializar autocompletado cuando carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAutocomplete('origen', 'origenSuggestions', 'origenValidation');
+            setupAutocomplete('destino', 'destinoSuggestions', 'destinoValidation');
+            
+            // Validar al perder el foco
+            document.getElementById('origen').addEventListener('blur', () => validateCityInput('origen'));
+            document.getElementById('destino').addEventListener('blur', () => validateCityInput('destino'));
+        });
+
+        // Establecer fecha mínima como hoy
+        document.getElementById('fecha').min = new Date().toISOString().split('T')[0];etteville", "Cary", "Wilmington", "High Point", "Greenville"],
+            "North Dakota": ["Fargo", "Bismarck", "Grand Forks", "Minot", "West Fargo", "Williston", "Wahpeton", "Dickinson", "Jamestown", "Mandan"],
+            "Ohio": ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron", "Dayton", "Parma", "Canton", "Youngstown", "Lorain"],
+            "Oklahoma": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton", "Edmond", "Moore", "Midwest City", "Enid", "Stillwater"],
+            "Oregon": ["Portland", "Eugene", "Salem", "Gresham", "Hillsboro", "Bend", "Beaverton", "Medford", "Springfield", "Corvallis"],
+            "Pennsylvania": ["Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading", "Scranton", "Bethlehem", "Lancaster", "Harrisburg", "Altoona"],
+            "Rhode Island": ["Providence", "Warwick", "Cranston", "Pawtucket", "East Providence", "Woonsocket", "Newport", "Central Falls", "Westerly", "North Providence"],
+            "South Carolina": ["Columbia", "Charleston", "North Charleston", "Mount Pleasant", "Rock Hill", "Greenville", "Summerville", "Sumter", "Goose Creek", "Hilton Head Island"],
+            "South Dakota": ["Sioux Falls", "Rapid City", "Aberdeen", "Brookings", "Watertown", "Mitchell", "Yankton", "Pierre", "Huron", "Vermillion"],
+            "Tennessee": ["Nashville", "Memphis", "Knoxville", "Chattanooga", "Clarksville", "Murfreesboro", "Franklin", "Johnson City", "Bartlett", "Hendersonville"],
+            "Texas": ["Houston", "San Antonio", "Dallas", "Austin", "Fort Worth", "El Paso", "Arlington", "Corpus Christi", "Plano", "Laredo", "Lubbock", "Garland", "Irving", "Amarillo", "Grand Prairie"],
+            "Utah": ["Salt Lake City", "West Valley City", "Provo", "West Jordan", "Orem", "Sandy", "Ogden", "St. George", "Layton", "Taylorsville"],
+            "Vermont": ["Burlington", "Essex", "South Burlington", "Colchester", "Rutland", "Bennington", "Brattleboro", "Hartford", "Middlebury", "St. Albans"],
+            "Virginia": ["Virginia Beach", "Norfolk", "Chesapeake", "Richmond", "Newport News", "Alexandria", "Hampton", "Portsmouth", "Suffolk", "Roanoke"],
+            "Washington": ["Seattle", "Spokane", "Tacoma", "Vancouver", "Bellevue", "Kent", "Everett", "Renton", "Spokane Valley", "Federal Way"],
+            "West Virginia": ["Charleston", "Huntington", "Parkersburg", "Morgantown", "Wheeling", "Martinsburg", "Fairmont", "Beckley", "Clarksburg", "Lewisburg"],
+            "Wisconsin": ["Milwaukee", "Madison", "Green Bay", "Kenosha", "Racine", "Appleton", "Waukesha", "Eau Claire", "Oshkosh", "Janesville"],
+            "Wyoming": ["Cheyenne", "Casper", "Laramie", "Gillette", "Rock Springs", "Sheridan", "Green River", "Evanston", "Riverton", "Jackson"]
+        };
+
+        // Poblar selectores de estados
+        function populateStates() {
+            const estadoOrigen = document.getElementById('estadoOrigen');
+            const estadoDestino = document.getElementById('estadoDestino');
+            
+            Object.keys(estadosYCiudades).sort().forEach(estado => {
+                const optionOrigen = new Option(estado, estado);
+                const optionDestino = new Option(estado, estado);
+                estadoOrigen.add(optionOrigen);
+                estadoDestino.add(optionDestino);
+            });
+        }
+
+        // Cargar ciudades cuando se selecciona un estado
+        function loadCities(tipo) {
+            const estadoId = tipo === 'origen' ? 'estadoOrigen' : 'estadoDestino';
+            const ciudadId = tipo === 'origen' ? 'ciudadOrigen' : 'ciudadDestino';
+            
+            const estadoSelect = document.getElementById(estadoId);
+            const ciudadSelect = document.getElementById(ciudadId);
+            
+            // Limpiar ciudades
+            ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
+            
+            if (estadoSelect.value) {
+                ciudadSelect.disabled = false;
+                const ciudades = estadosYCiudades[estadoSelect.value];
+                
+                ciudades.sort().forEach(ciudad => {
+                    const option = new Option(ciudad, ciudad);
+                    ciudadSelect.add(option);
+                });
+            } else {
+                ciudadSelect.disabled = true;
+                ciudadSelect.innerHTML = '<option value="">Primero selecciona un estado</option>';
+            }
+        }
+
+        // Inicializar cuando carga la página
+        document.addEventListener('DOMContentLoaded', function() {
+            populateStates();
+        });
+
+        // Establecer fecha mínima como hoy
+        document.getElementById('fecha').min = new Date().toISOString().split('T')[0];
+
+        // Funciones del carrusel de testimonios
+        function toggleTestimonials() {
+            const tab = document.getElementById('testimonialsTab');
+            tab.classList.toggle('active');
+        }
+
+        function closeTestimonials() {
+            const tab = document.getElementById('testimonialsTab');
+            tab.classList.remove('active');
+        }
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carouselVideos');
+            const dots = document.querySelectorAll('.nav-dot');
+            
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function playVideo(videoNumber) {
+            alert(`Reproduciendo video testimonial #${videoNumber}\n\n¡Aquí puedes integrar tus videos reales!\n\nPuedes usar:\n- Videos de YouTube\n- Videos subidos a tu servidor\n- Videos de Vimeo\n- O cualquier plataforma de video`);
+        }
+
+        // Auto-avanzar el carrusel cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // Manejar el envío del formulario
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const estadoOrigen = document.getElementById('estadoOrigen').value;
+            const ciudadOrigen = document.getElementById('ciudadOrigen').value;
+            const estadoDestino = document.getElementById('estadoDestino').value;
+            const ciudadDestino = document.getElementById('ciudadDestino').value;
+            const fecha = document.getElementById('fecha').value;
+            const personas = document.getElementById('personas').value;
+            const maletas = document.getElementById('maletas').value;
+            
+            // Validar que todos los campos estén llenos
+            if (!estadoOrigen || !ciudadOrigen || !estadoDestino || !ciudadDestino || !fecha || !personas || !maletas) {
+                alert('Por favor, completa todos los campos antes de cotizar.');
+                return;
+            }
+            
+            // Crear mensaje para WhatsApp
+            const mensaje = `🚐 *Solicitud de Cotización - Raite Yisus*
+
+📍 *Origen:* ${ciudadOrigen}, ${estadoOrigen}
+📍 *Destino:* ${ciudadDestino}, ${estadoDestino}
+📅 *Fecha:* ${fecha}
+👥 *Personas:* ${personas}
+🧳 *Maletas:* ${maletas}
+
+¡Hola! Me interesa cotizar este viaje. ¿Podrían darme información sobre disponibilidad y precio?`;
+            
+            // Codificar el mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            
+            // Número de WhatsApp (reemplaza con tu número real)
+            const numeroWhatsApp = '1234567890'; // Cambia este número por tu número de WhatsApp
+            
+            // Crear URL de WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+            
+            // Abrir WhatsApp
+            window.open(urlWhatsApp, '_blank');
+        });
+
+        // Efectos de animación en los inputs
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
