@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raite Yisus - Transporte Seguro entre Estados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .info-section {
+            flex: 1;
+            min-width: 300px;
+            color: white;
+            padding: 20px;
+        }
+
+        .info-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .features li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .quote-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 450px;
+            width: 100%;
+            transform: translateY(-20px);
+        }
+
+        .quote-container h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .quote-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .quote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .quote-btn:active {
+            transform: translateY(0);
+        }
+
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            text-align: center;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .trust-item .number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .trust-item .label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* Pestaña popup de testimonios */
+        .testimonials-tab {
+            position: fixed;
+            left: -300px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 350px;
+            background: white;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .testimonials-tab.active {
+            left: 0;
+        }
+
+        .tab-trigger {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            background: #667eea;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: background 0.3s ease;
+        }
+
+        .tab-trigger:hover {
+            background: #5a6fd8;
+        }
+
+        .testimonials-content {
+            padding: 25px;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonials-header h3 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .testimonials-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .carousel-videos {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .video-slide {
+            min-width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .video-placeholder::before {
+            content: "▶";
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .video-info {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .video-info h4 {
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #667eea;
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #667eea;
+            transition: background 0.3s ease;
+        }
+
+        .carousel-arrows:hover {
+            background: white;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        .close-tab {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-tab:hover {
+            color: #666;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .main-content {
+                gap: 30px;
+            }
+
+            .quote-container {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+            }
+
+            .info-section {
+                text-align: center;
+                order: 2;
+                padding: 10px;
+            }
+
+            .info-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .quote-container {
+                order: 1;
+                margin-bottom: 20px;
+                padding: 30px 20px;
+                max-width: 100%;
+                transform: translateY(0);
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .trust-indicators {
+                gap: 20px;
+                margin-top: 40px;
+            }
+
+            .trust-item .number {
+                font-size: 1.5rem;
+            }
+
+            .testimonials-tab {
+                width: 90vw;
+                left: -90vw;
+            }
+
+            .testimonials-tab.active {
+                left: 0;
+            }
+
+            .tab-trigger {
+                right: -45px;
+                padding: 12px 15px;
+                font-size: 0.8rem;
+            }
+
+            .testimonials-content {
+                padding: 20px;
+            }
+
+            .video-placeholder {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 40px 0 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .quote-container {
+                padding: 20px 15px;
+            }
+
+            .quote-container h3 {
+                font-size: 1.2rem;
+            }
+
+            input, select {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+
+            .quote-btn {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            .features li {
+                font-size: 1rem;
+            }
+
+            .trust-indicators {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .trust-item {
+                min-width: 120px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .quote-container {
+                padding: 15px 10px;
+            }
+
+            .testimonials-tab {
+                width: 95vw;
+                left: -95vw;
+            }
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-elements::before,
+        .floating-elements::after {
+            content: '';
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-elements::before {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-elements::after {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements"></div>
+    
+    <!-- Pestaña de testimonios -->
+    <div class="testimonials-tab" id="testimonialsTab">
+        <button class="tab-trigger" onclick="toggleTestimonials()">
+            ⭐ Clientes Satisfechos
+        </button>
+        <button class="close-tab" onclick="closeTestimonials()">×</button>
+        
+        <div class="testimonials-content">
+            <div class="testimonials-header">
+                <h3>🎥 Testimonios Reales</h3>
+                <p>Escucha lo que dicen nuestros clientes</p>
+            </div>
+            
+            <div class="carousel-container">
+                <div class="carousel-videos" id="carouselVideos">
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(1)">
+                            <div class="video-info">
+                                <h4>María González</h4>
+                                <p>"Excelente servicio de LA a Phoenix"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(2)">
+                            <div class="video-info">
+                                <h4>Carlos Martínez</h4>
+                                <p>"Muy puntual y cómodo viaje"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(3)">
+                            <div class="video-info">
+                                <h4>Ana Rodríguez</h4>
+                                <p>"Conductores muy profesionales"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(4)">
+                            <div class="video-info">
+                                <h4>José López</h4>
+                                <p>"Precio justo y buen trato"</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-slide">
+                        <div class="video-placeholder" onclick="playVideo(5)">
+                            <div class="video-info">
+                                <h4>Carmen Flores</h4>
+                                <p>"Los recomiendo 100%"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-arrows carousel-prev" onclick="prevSlide()">❮</button>
+                <button class="carousel-arrows carousel-next" onclick="nextSlide()">❯</button>
+            </div>
+            
+            <div class="carousel-nav" id="carouselNav">
+                <div class="nav-dot active" onclick="goToSlide(0)"></div>
+                <div class="nav-dot" onclick="goToSlide(1)"></div>
+                <div class="nav-dot" onclick="goToSlide(2)"></div>
+                <div class="nav-dot" onclick="goToSlide(3)"></div>
+                <div class="nav-dot" onclick="goToSlide(4)"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">🚐 Raite Yisus</h1>
+            <p class="tagline">Transporte Seguro y Confiable</p>
+            <p class="subtitle">Te llevamos de estado a estado por todo Estados Unidos con la mejor experiencia de viaje</p>
+        </header>
+
+        <div class="main-content">
+            <div class="info-section">
+                <h2>¿Por qué elegir Raite Yisus?</h2>
+                <ul class="features">
+                    <li>Conductores experimentados y certificados</li>
+                    <li>Vehículos cómodos y en excelente estado</li>
+                    <li>Precios competitivos y transparentes</li>
+                    <li>Servicio puerta a puerta</li>
+                    <li>Disponible 24/7</li>
+                    <li>Seguro de viaje incluido</li>
+                </ul>
+            </div>
+
+            <div class="quote-container">
+                <h3>💰 Cotiza tu viaje ahora</h3>
+                <form id="quoteForm">
+                    <div class="form-group">
+                        <label for="origen">Ciudad de Origen</label>
+                        <input type="text" id="origen" name="origen" placeholder="Ej: Los Angeles, CA" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destino">Ciudad de Destino</label>
+                        <input type="text" id="destino" name="destino" placeholder="Ej: Houston, TX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha del Viaje</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="personas">Personas</label>
+                            <select id="personas" name="personas" required>
+                                <option value="">Seleccionar</option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6+">6+ personas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="maletas">Maletas</label>
+                            <select id="maletas" name="maletas" required>
+                                <option value="">Seleccionar</option>
+                                <option value="0">Sin maletas</option>
+                                <option value="1">1 maleta</option>
+                                <option value="2">2 maletas</option>
+                                <option value="3">3 maletas</option>
+                                <option value="4">4 maletas</option>
+                                <option value="5+">5+ maletas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="quote-btn">
+                        📱 ¡Cotizar Ahora en WhatsApp!
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="trust-indicators">
+            <div class="trust-item">
+                <span class="number">500+</span>
+                <span class="label">Viajes Completados</span>
+            </div>
+            <div class="trust-item">
+                <span class="number">98%</span>
+                <span class="label">Satisfacción del Cliente</span>
+            </div>
+            <div class="trust-item">
+                <span class="number">15</span>
+                <span class="label">Estados Cubiertos</span>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Raite Yisus. Conectando destinos, creando experiencias.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Variables del carrusel
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        // Establecer fecha mínima como hoy
+        document.getElementById('fecha').min = new Date().toISOString().split('T')[0];
+
+        // Funciones del carrusel de testimonios
+        function toggleTestimonials() {
+            const tab = document.getElementById('testimonialsTab');
+            tab.classList.toggle('active');
+        }
+
+        function closeTestimonials() {
+            const tab = document.getElementById('testimonialsTab');
+            tab.classList.remove('active');
+        }
+
+        function updateCarousel() {
+            const carousel = document.getElementById('carouselVideos');
+            const dots = document.querySelectorAll('.nav-dot');
+            
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function playVideo(videoNumber) {
+            alert(`Reproduciendo video testimonial #${videoNumber}\n\n¡Aquí puedes integrar tus videos reales!\n\nPuedes usar:\n- Videos de YouTube\n- Videos subidos a tu servidor\n- Videos de Vimeo\n- O cualquier plataforma de video`);
+        }
+
+        // Auto-avanzar el carrusel cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // Manejar el envío del formulario
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const origen = document.getElementById('origen').value;
+            const destino = document.getElementById('destino').value;
+            const fecha = document.getElementById('fecha').value;
+            const personas = document.getElementById('personas').value;
+            const maletas = document.getElementById('maletas').value;
+            
+            // Validar que todos los campos estén llenos
+            if (!origen || !destino || !fecha || !personas || !maletas) {
+                alert('Por favor, completa todos los campos antes de cotizar.');
+                return;
+            }
+            
+            // Crear mensaje para WhatsApp
+            const mensaje = `🚐 *Solicitud de Cotización - Raite Yisus*
+
+📍 *Origen:* ${origen}
+📍 *Destino:* ${destino}
+📅 *Fecha:* ${fecha}
+👥 *Personas:* ${personas}
+🧳 *Maletas:* ${maletas}
+
+¡Hola! Me interesa cotizar este viaje. ¿Podrían darme información sobre disponibilidad y precio?`;
+            
+            // Codificar el mensaje para URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+            
+            // Número de WhatsApp (reemplaza con tu número real)
+            const numeroWhatsApp = '1234567890'; // Cambia este número por tu número de WhatsApp
+            
+            // Crear URL de WhatsApp
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensajeCodificado}`;
+            
+            // Abrir WhatsApp
+            window.open(urlWhatsApp, '_blank');
+        });
+
+        // Efectos de animación en los inputs
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
